@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Fallback: for any route not found, serve index.html
-app.get('*', (req, res) => {
+app.get('*', (req, res) => {git 
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
