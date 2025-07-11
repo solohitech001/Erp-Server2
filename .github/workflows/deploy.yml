@@ -1,9 +1,9 @@
-name: Build and Deploy Node App
+name: Deploy Node App
 
 on:
   push:
     branches:
-      - main  # Change to your branch name if needed
+      - main
 
 jobs:
   build:
@@ -16,14 +16,10 @@ jobs:
       - name: ⚙️ Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20  # Set the version of Node.js you use
+          node-version: 20.5.0
 
       - name: 📦 Install Dependencies
         run: npm install
 
-      - name: 🔨 Build the App
-        run: npm run build
-
-      - name: 🚀 Deploy (Optional)
-        run: |
-          echo "Add your deployment steps here, e.g. upload to server, S3, or EC2"
+      - name: 🚀 Start the App
+        run: echo "App ready for deployment"
