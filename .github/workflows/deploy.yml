@@ -23,3 +23,23 @@ jobs:
 
       - name: 🚀 Start the App
         run: echo "App ready for deployment"
+
+      - name: 📤 Upload files to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "."   # uploads entire repo
+          target: "/home/ubuntu/Erp-Server2"  # change if needed
+
+      - name: 🔁 SSH and Restart App on EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd /home/ubuntu/Erp-Server2
+            npm install
+            pm2 restart erpserver || pm2 start server.js --name erpserver
